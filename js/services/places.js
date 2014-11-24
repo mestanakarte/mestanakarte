@@ -1,15 +1,15 @@
-app.factory('Places', ['$http', '$rootScope', function($http, $rootScope){
+app.factory('Places', ['$http', function($http) {
 
     var service = {};
-    
+
     service.getPlaces = function() {
         return $http({
             url: 'places.json',
             method: 'GET'
-        })
-    }
+        });
+    };
     /*$rootScope.places = [];
-    function getPlaces(){    
+    function getPlaces(){
         $resource("/places.json").query(function(data) {
             $rootScope.places = data;
              console.log(data);
@@ -17,14 +17,18 @@ app.factory('Places', ['$http', '$rootScope', function($http, $rootScope){
         });
     }
     */
-    
-    service.get = function(id){
-    
-    }
-    
-    service.add = function(place){
-    
-    }
-    
+
+    service.get = function (id) {
+
+    };
+
+    service.add = function (place){
+
+    };
+
+    service.delete = function (place) {
+
+    };
+
     return service;
 }]);

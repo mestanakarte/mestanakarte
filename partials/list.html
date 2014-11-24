@@ -1,14 +1,18 @@
 <div id="placesList">
- 
+
     <ul>
         <li ng-repeat="place in places">
-            <a href="" ng-click="show(place)">{{ place.p_title }}</a>
-            <a href="index.html#/edit/{{place.id}}"  class="pull-right" rel="tooltip" title="{{ 'UPDATE' }}"><img class="icon-edit" src="../img/pencil.png" alt="Change this mark"></a>
-            <a href="" ng-click="confirm(place)" class="pull-right" rel="tooltip" title="{{ 'DELETE' }}"><img class="icon-remove" src="../img/trash.png" alt="Remove this mark"></a>
+            <a href="" ng-click="show(place)">{{ place.title }}</a>
+            <a href="index.html#/edit/{{place.id}}" class="pull-right" rel="tooltip" title="Update">
+                <img class="icon-edit" src="../img/pencil.png" alt="Change this mark">
+            </a>
+            <button ng-click="confirm(place)" class="pull-right" rel="tooltip" title="Delete">
+                <img class="icon-remove" src="../img/trash.png" alt="Remove this mark">
+            </button>
         </li>
     </ul>
- 
+
     <div>
-        <a href="places/index#/add" class="btn btn-success">{{ 'ADD_PLACE' }}</a>
+        <a href="places/index#/add" class="btn btn-success">Add place</a>
     </div>
 </div>
