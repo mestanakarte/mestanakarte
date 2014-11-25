@@ -1,4 +1,4 @@
-window.app = angular.module('mainMod', ['ngRoute']);
+window.app = angular.module('mestaApp', ['ngRoute', 'ngResource']);
 
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/list', {
