@@ -36,4 +36,9 @@ app.controller('ListController', ['$scope', '$rootScope', 'Places',
         $rootScope.$broadcast('place:show', place);
     };
 
+    // TODO: don't use root scope. Create parent scope for entire page.
+    Places.query().then(function (places) {
+        $rootScope.places = places;
+    });
+
 }]);

@@ -1,21 +1,28 @@
-app.directive('sMap', ['$rootScope', 'Places',
-	function($rootScope, Places){
+app.directive('ymap', ['$rootScope',
+	function($rootScope){
 		return {
-			restrict: 'A',
-			link: function($scope){
-
+			restrict: 'E',
+			scope: {
+				placemarks: '=',
+				width: '@',
+				height: '@'
+			},
+			link: function($scope, element){
+				var map;
 				ymaps.ready(init);
 
+				element.css({
+					width: parseInt($scope.width, 10) + 'px',
+					height: parseInt($scope.height, 10) + 'px'
+				});
+
 				function init () {
-					$scope.myMap = new ymaps.Map('map', {
+					map = new ymaps.Map(element[0], {
 						center: [53.8992,27.5580],
 						zoom: 11
 					});
 
-
-					showMarkers();
-
-					$scope.myMap.events.add('click', function(event){
+					map.events.add('click', function(event){
 						var coords = event.get('coordPosition');
 
 						$rootScope.$broadcast('map:pointSelected', {
@@ -23,25 +30,21 @@ app.directive('sMap', ['$rootScope', 'Places',
 							lng : Math.round(coords[1] * 100) / 100
 						});
 					});
+
+					showMarkers();
 				}
 
+				$scope.$watch('placemarks', showMarkers);
 
-				function showMarkers(){
-					$scope.places = [];
-					Places.query().then(function(data){
-						$scope.places = data;
-
-						angular.forEach(data, function(val){
-
-							var newPlacemark = new ymaps.Placemark([val.lng, val.lat], {
-								hintContent: val.title,
-								balloonContent: val.description
-							});
-
-							$scope.myMap.geoObjects.add(newPlacemark);
+				function showMarkers() {
+					if (!map) return;
+					$scope.placemarks.forEach(function (place) {
+						var coords = [place.lng, place.lat];
+						var mark = new ymaps.Placemark(coords, {
+							hintContent: place.title,
+							balloonContent: place.description
 						});
-					}).catch(function(data){
-						console.error(data);
+						map.geoObjects.add(mark);
 					});
 				}
 			}

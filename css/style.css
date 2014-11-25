@@ -322,3 +322,7 @@ display: inline; /* Because of IE Doubled Float-Margin Bug */
 p.footer-right a, p.footer-right a:visited  {
 font-weight: normal;
 }
+
+ymap {
+    display: inline-block;
+}
