@@ -48,7 +48,6 @@ describe('Mesta services', function () {
 					expect(data.length).toBe(2);
 					done();
 				});
-
 				$httpBackend.flush();
 			});
 		});
