@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Places.Models;
+using Yandex;
 
 namespace Places.Controllers
 {
@@ -77,11 +78,22 @@ namespace Places.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
+            Address address = geotag.Address;
+            string placeAddress = string.Format("{0} {1} {2} {3}", address.City, address.Street, address.HouseNumber, address.Housing);
+            GeoObjectCollection results = YandexGeocoder.Geocode(placeAddress);
+            foreach (GeoObject result in results)
+            {
+                geotag.Point = new Point();
+                geotag.Point.Lat = result.Point.Lat;
+                geotag.Point.Long = result.Point.Long;
+                db.GeoTags.Add(geotag);
+                db.SaveChanges();
 
-            db.GeoTags.Add(geotag);
-            db.SaveChanges();
+                return CreatedAtRoute("DefaultApi", new { id = geotag.Id }, geotag);
+            }
 
-            return CreatedAtRoute("DefaultApi", new { id = geotag.Id }, geotag);
+            return BadRequest();
         }
 
         // DELETE api/GeoTag/5

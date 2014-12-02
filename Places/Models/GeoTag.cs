@@ -15,5 +15,6 @@ namespace Places.Models
         public int KindId { get; set; }
         public int TypeId { get; set; }
         public virtual Address Address { get; set; }
+        public virtual Point Point { get; set; }
     }
 }
