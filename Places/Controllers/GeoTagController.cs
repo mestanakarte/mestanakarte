@@ -18,9 +18,37 @@ namespace Places.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET api/GeoTag
-        public IQueryable<GeoTag> GetGeoTags()
+        public IQueryable<GeoTag> GetGeoTags([FromUri]SearchQuery query)
         {
-            return db.GeoTags;
+            IQueryable<GeoTag> geotags = db.Set<GeoTag>();
+
+            if (query.City != null)
+            {
+                geotags = geotags.Where(p => p.Address.City.Contains(query.City));
+            }
+
+            if (query.Street != null)
+            {
+                geotags = geotags.Where(p => p.Address.Street.Contains(query.Street));
+            }
+
+            if (query.HouseNumber != 0)
+            {
+                geotags = geotags.Where(p => p.Address.HouseNumber.Equals(query.HouseNumber));
+            }
+
+            if (query.KindId != 0)
+            {
+                geotags = geotags.Where(p => p.KindId.Equals(query.KindId));
+            }
+
+            if (query.TypeId != 0)
+            {
+                geotags = geotags.Where(p => p.KindId.Equals(query.KindId));
+            }
+
+        
+            return geotags;
         }
 
         // GET api/GeoTag/5

@@ -13,7 +13,7 @@ namespace Places.Models
         public int GeoTagId { get; set; }
         public String City { get; set; }
         public String Street { get; set; }
-        public String HouseNumber { get; set; }
+        public int HouseNumber { get; set; }
         public int Housing { get; set; }
     }
 }

@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201412022030159_add point model.Designer.cs">
       <DependentUpon>201412022030159_add point model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412042002297_Fix_HousingNumber_type.cs" />
+    <Compile Include="Migrations\201412042002297_Fix_HousingNumber_type.Designer.cs">
+      <DependentUpon>201412042002297_Fix_HousingNumber_type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -193,6 +197,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kind.cs" />
     <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\SearchQuery.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -264,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412022030159_add point model.resx">
       <DependentUpon>201412022030159_add point model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412042002297_Fix_HousingNumber_type.resx">
+      <DependentUpon>201412042002297_Fix_HousingNumber_type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
