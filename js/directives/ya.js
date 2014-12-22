@@ -61,6 +61,9 @@ app.directive('yMap', ['$rootScope', '$compile',
 					balloonContent: place.description
 				});
 				mark.place = place;
+				scope.$on('$destroy', function () {
+					yMap.removeGeoObject(mark);
+				})
 				yMap.addGeoObject(mark);
 			}
 		}
