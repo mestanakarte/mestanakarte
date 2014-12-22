@@ -4,9 +4,15 @@ app.controller('FormController', ['$scope', '$rootScope', '$stateParams', '$stat
     var placeId = $stateParams.placeId;
     var isEdit = Boolean(placeId);
 
-    $scope.place = {};
     $scope.isNew = !isEdit;
     $scope.saving = false;
+    if (isEdit) {
+        Places.get({ id: placeId }).then(function (place) {
+            $scope.place = place;
+        });
+    } else {
+        $scope.place = {};
+    }
 
     $rootScope.$on('map:pointSelected', function(event, data) {
         $scope.$apply(function () {
