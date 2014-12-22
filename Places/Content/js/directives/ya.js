@@ -15,8 +15,12 @@ app.directive('yMap', ['$rootScope', '$compile',
 					ymaps.ready(function () {
 						scope.map = new ymaps.Map(element[0], {
 							center: [53.8992,27.5580],
-							zoom: 11
+							zoom: 11,
+							behaviors: ['default', 'scrollZoom']
 						});
+						scope.map.controls
+							.add('zoomControl')
+							.add('typeSelector');
 						scope.map.events.add('click', function(event){
 							var coords = event.get('coordPosition');
 							$rootScope.$broadcast('map:pointSelected', {

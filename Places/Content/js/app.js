@@ -13,7 +13,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
         })
             // Places list and filter
             .state('map.list', {
-                url: '/list?show', // show=placeId - highlight place
+                url: '/list',
                 templateUrl: 'partials/map.list.html',
                 controller: 'ListController'
             })
