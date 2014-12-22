@@ -1,5 +1,5 @@
 app.provider('Places', function PlacesProvider() {
-    var pattern = '/places/:id';
+    var pattern = '/GeoTag/:id';
 
     this.setUrlPattern = function setUrlPattern(newPattern) {
         pattern = newPattern;
@@ -16,7 +16,7 @@ app.provider('Places', function PlacesProvider() {
                 return res.get(params).$promise;
             },
             save: function (params) {
-                return res.save(params).$promise.catch(function () { if (!params.id) params.id = 44; return params });
+                return res.save(params).$promise;
             },
             delete: function (params) {
                 return res.delete(params).$promise;

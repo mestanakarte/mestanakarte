@@ -1,14 +1,6 @@
 window.app = angular.module('mestaApp', ['ui.router', 'ngResource']);
 
-// Temporary solution for serverless development
-var isTest = window.top && window.top.karma;
-if (!isTest) {
-    app.config(['PlacesProvider', function (PlacesProvider) {
-        PlacesProvider.setUrlPattern('/mockapi/places:id.json');
-    }]);
-}
-
-app.value('apiRoot', location.origin);
+app.value('apiRoot', location.origin + '/api');
 
 app.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
@@ -36,7 +28,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 url: '/edit/:placeId',
                 templateUrl: 'partials/map.form.html',
                 controller: 'FormController'
-            })
+            });
 
     $urlRouterProvider.otherwise('/map/list');
 
