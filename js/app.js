@@ -8,6 +8,8 @@ if (!isTest) {
     }]);
 }
 
+app.value('apiRoot', location.origin);
+
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/list', {
         templateUrl: 'partials/list.html',

@@ -5,8 +5,9 @@ app.provider('Places', function PlacesProvider() {
         pattern = newPattern;
     };
 
-    this.$get = ['$resource', function($resource) {
-        var res = $resource(pattern, { id: '@id' });
+    this.$get = ['$resource', 'apiRoot', function($resource, apiRoot) {
+        var url = apiRoot + pattern;
+        var res = $resource(url, { id: '@id' });
         return {
             query: function (params) {
                 return res.query(params).$promise;
