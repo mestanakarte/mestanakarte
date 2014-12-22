@@ -3,17 +3,15 @@ app.directive('ymap', ['$rootScope',
 		return {
 			restrict: 'E',
 			scope: {
-				placemarks: '=',
-				width: '@',
-				height: '@'
+				placemarks: '='
 			},
-			link: function($scope, element){
+			link: function($scope, element, attr){
 				var map;
 				ymaps.ready(init);
 
 				element.css({
-					width: parseInt($scope.width, 10) + 'px',
-					height: parseInt($scope.height, 10) + 'px'
+					width: attr.width + 'px',
+					height: attr.height + 'px'
 				});
 
 				function init () {
