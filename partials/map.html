@@ -1,7 +1,7 @@
 <!-- Content left -->
 <div id="content-box-in-left">
     <y-map width="800" height="450">
-        <y-geo-object x="{{ query }}" ng-repeat="place in places | filter: { title: query }" place="place"></y-geo-object>
+        <y-geo-object ng-repeat="place in places | filter: { title: query }" place="place"></y-geo-object>
     </y-map>
 </div>
 <!-- Content left end -->

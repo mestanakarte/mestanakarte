@@ -20,8 +20,8 @@ app.directive('yMap', ['$rootScope', '$compile',
 						scope.map.events.add('click', function(event){
 							var coords = event.get('coordPosition');
 							$rootScope.$broadcast('map:pointSelected', {
-								lat : Math.round(coords[0] * 100) / 100,
-								lng : Math.round(coords[1] * 100) / 100
+								lng : Math.round(coords[0] * 10000) / 10000,
+								lat : Math.round(coords[1] * 10000) / 10000
 							});
 						});
 						$rootScope.$on('place:show', function (event, place) {
@@ -41,7 +41,7 @@ app.directive('yMap', ['$rootScope', '$compile',
 							$compile(element.children())(scope);
 						});
 					});
-				}
+				};
 			}
 		};
 }])
@@ -56,15 +56,51 @@ app.directive('yMap', ['$rootScope', '$compile',
 			link: function (scope, element, attr, yMap) {
 				var place = scope.place;
 				var coords = [place.lng, place.lat];
+				var options = {};
+				if (place.editing) {
+					options.preset = 'twirl#redIcon';
+				}
 				var mark = new ymaps.Placemark(coords, {
 					hintContent: place.title,
 					balloonContent: place.description
-				});
+				}, options);
 				mark.place = place;
+				var isEditing = false;
+				var savedCoordsBeforeEdit = {};
+				$rootScope.$on('place:edit', function (_, place) {
+					if (place.id === scope.place.id) {
+						savedCoordsBeforeEdit.lat = place.lat;
+						savedCoordsBeforeEdit.lng = place.lng;
+						isEditing = true;
+						mark.options.set('preset', 'twirl#redIcon');
+					}
+				});
+				$rootScope.$on('place:cancelEdit', function (_, place) {
+					if (place.id === scope.place.id) {
+						isEditing = false;
+						mark.options.unset('preset');
+						mark.geometry.setCoordinates([savedCoordsBeforeEdit.lng, savedCoordsBeforeEdit.lat]);
+						savedCoordsBeforeEdit = {};
+					}
+				});
+				$rootScope.$on('place:save', function (_, place) {
+					if (place.id === scope.place.id) {
+						isEditing = false;
+						mark.options.unset('preset');
+					}
+				});
+				$rootScope.$on('map:pointSelected', function(_, place) {
+					if (isEditing) {
+						mark.geometry.setCoordinates([place.lng, place.lat]);
+					}
+				});
+				scope.$watch('place', function (place) {
+					mark.geometry.setCoordinates([place.lng, place.lat]);
+				}, angular.equals);
 				scope.$on('$destroy', function () {
 					yMap.removeGeoObject(mark);
-				})
+				});
 				yMap.addGeoObject(mark);
 			}
-		}
+		};
 }]);

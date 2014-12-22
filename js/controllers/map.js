@@ -15,5 +15,7 @@ app.controller('MapController', ['$scope', '$stateParams', 'Places',
 		Places.query().then(function (places) {
 			$scope.places = places;
 		});
+
+		$scope.newPlace = {};
 	}
 ]);
