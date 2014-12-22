@@ -2,8 +2,8 @@
 
     <ul>
         <li ng-repeat="place in places">
-            <a href="#" ng-click="show(place)">{{ place.title }}</a>
-            <a href="#/edit/{{place.id}}" class="pull-right" rel="tooltip" title="Update">
+            <a ng-click="show(place)">{{ place.title }}</a>
+            <a ui-sref="map.edit({ placeId: place.id })" class="pull-right" rel="tooltip" title="Update">
                 <img class="icon-edit" src="../img/pencil.png" alt="Change this mark">
             </a>
             <button ng-click="confirm(place)" class="pull-right" rel="tooltip" title="Delete">
@@ -13,6 +13,6 @@
     </ul>
 
     <div>
-        <a href="#/add" class="btn btn-success">Add place</a>
+        <a ui-sref="map.add" class="btn btn-success">Add place</a>
     </div>
 </div>

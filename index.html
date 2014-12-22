@@ -13,7 +13,7 @@
 
 <!-- JS -->
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
 
@@ -21,6 +21,7 @@
 <script src="js/app.js"></script>
 <script src="js/services/places.js"></script>
 <script src="js/directives/sMap.js"></script>
+<script src="js/controllers/map.js"></script>
 <script src="js/controllers/form.js"></script>
 <script src="js/controllers/list.js"></script>
 
@@ -57,22 +58,7 @@
 
 	<!-- Content box -->
 	<div id="content-box">
-		<div id="content-box-in">
-
-			<!-- Content left -->
-			<div id="content-box-in-left">
-				<ymap width="800" height="450" ng-if="places" placemarks="places"></ymap>
-			</div>
-			<!-- Content left end -->
-
-			<!-- Content right -->
-			<div id="content-box-in-right">
-				<div id="content-box-in-right-in" ng-view>
-				</div>
-			</div>
-
-			<div class="cleaner">&nbsp;</div>
-		</div>
+		<div id="content-box-in" ui-view></div>
 	</div>
 	<!-- Content box end -->
 

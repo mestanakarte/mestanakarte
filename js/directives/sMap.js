@@ -29,6 +29,19 @@ app.directive('ymap', ['$rootScope',
 						});
 					});
 
+					$rootScope.$on('place:show', function (event, place) {
+						var it = map.geoObjects.getIterator();
+						var marker
+						while ((marker = it.getNext())) {
+							if (marker.place === place) {
+								break;
+							}
+						}
+						if (marker) {
+							marker.balloon.open();
+						}
+					});
+
 					showMarkers();
 				}
 
@@ -42,6 +55,7 @@ app.directive('ymap', ['$rootScope',
 							hintContent: place.title,
 							balloonContent: place.description
 						});
+						mark.place = place;
 						map.geoObjects.add(mark);
 					});
 				}
