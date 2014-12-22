@@ -24,8 +24,8 @@ app.directive('yMap', ['$rootScope', '$compile',
 						scope.map.events.add('click', function(event){
 							var coords = event.get('coordPosition');
 							$rootScope.$broadcast('map:pointSelected', {
-								lng : Math.round(coords[0] * 10000) / 10000,
-								lat : Math.round(coords[1] * 10000) / 10000
+								lng : Math.round(coords[0] * 1e6) / 1e6,
+								lat : Math.round(coords[1] * 1e6) / 1e6
 							});
 						});
 						$rootScope.$on('place:show', function (event, place) {
