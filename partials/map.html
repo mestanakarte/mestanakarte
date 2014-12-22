@@ -1,6 +1,8 @@
 <!-- Content left -->
 <div id="content-box-in-left">
-    <ymap width="800" height="450" ng-if="places" placemarks="places"></ymap>
+    <y-map width="800" height="450">
+        <y-geo-object ng-repeat="place in places" place="place"></y-geo-object>
+    </y-map>
 </div>
 <!-- Content left end -->
 
