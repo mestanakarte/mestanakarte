@@ -12,5 +12,6 @@ namespace Places.Models
         public int HouseNumber { get; set; }
         public int KindId { get; set; }
         public int TypeId { get; set; }
+        public string AddressLine { get; set; }
     }
 }

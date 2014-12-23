@@ -7,4 +7,13 @@ namespace Yandex
     public enum KindType : byte { house, street, metro, district, locality }
 
     public enum ScoType : byte { longlat, latlong }
+
+    public class Location
+    {
+
+        public string City { get; set; }
+        public string Street { get; set; }
+        public int HouseNumber { get; set; }
+        public int Housing { get; set; }
+    }
 }

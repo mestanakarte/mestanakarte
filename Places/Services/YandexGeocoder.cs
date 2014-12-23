@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Net;
+using System.Xml;
 
 namespace Yandex
 {
@@ -7,7 +8,7 @@ namespace Yandex
     {
         #region const, fields, constructor, properties
         const string REQUESRT_URL = "http://geocode-maps.yandex.ru/1.x/?geocode={0}&format=xml&results={1}&lang={2}";
-
+        const string REQUESRT_LOCATION_URL = "http://geocode-maps.yandex.ru/1.x/?geocode={0},{1}&format=xml";
         private static string _key;
 
         static YandexGeocoder()
@@ -86,6 +87,26 @@ namespace Yandex
 
             return new GeoObjectCollection(DownloadString(request_ulr));
         }
+
+        public static Location Geolocation(double Lat, double Long)
+        {
+            string request_url = string.Format(REQUESRT_LOCATION_URL, Long, Lat);
+            string xml = DownloadString(request_url);
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+
+            XmlNamespaceManager ns = new XmlNamespaceManager(doc.NameTable);
+            ns.AddNamespace("ns", "http://maps.yandex.ru/ymaps/1.x");
+            ns.AddNamespace("opengis", "http://www.opengis.net/gml");
+            ns.AddNamespace("geocoder", "http://maps.yandex.ru/geocoder/1.x");
+
+            // select geo objects
+            XmlNodeList nodes = doc.SelectNodes("//ns:ymaps/ns:GeoObjectCollection/opengis:featureMember/ns:GeoObject", ns);
+
+            return new Location();
+        }
+
         #endregion
 
 

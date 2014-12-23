@@ -47,6 +47,11 @@ namespace Places.Controllers
                 geotags = geotags.Where(p => p.KindId.Equals(query.KindId));
             }
 
+            if (query.AddressLine != null)
+            {
+                geotags = geotags.Where(p => p.Address.AddressLine.Contains(query.AddressLine));
+            }
+
         
             return geotags;
         }
@@ -65,6 +70,7 @@ namespace Places.Controllers
         }
 
         // PUT api/GeoTag/5
+        [Authorize]
         public IHttpActionResult PutGeoTag(int id, GeoTag geotag)
         {
             if (!ModelState.IsValid)
@@ -100,6 +106,7 @@ namespace Places.Controllers
 
         // POST api/GeoTag
         [ResponseType(typeof(GeoTag))]
+        [Authorize]
         public IHttpActionResult PostGeoTag(GeoTag geotag)
         {
             if (!ModelState.IsValid)
@@ -125,6 +132,7 @@ namespace Places.Controllers
         }
 
         // DELETE api/GeoTag/5
+        [Authorize]
         [ResponseType(typeof(GeoTag))]
         public IHttpActionResult DeleteGeoTag(int id)
         {

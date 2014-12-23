@@ -36,6 +36,7 @@ namespace Places.Controllers
         }
 
         // PUT api/Kind/5
+        [Authorize]
         public IHttpActionResult PutKind(int id, Kind kind)
         {
             if (!ModelState.IsValid)
@@ -70,6 +71,7 @@ namespace Places.Controllers
         }
 
         // POST api/Kind
+        [Authorize]
         [ResponseType(typeof(Kind))]
         public IHttpActionResult PostKind(Kind kind)
         {
@@ -86,6 +88,7 @@ namespace Places.Controllers
 
         // DELETE api/Kind/5
         [ResponseType(typeof(Kind))]
+        [Authorize]
         public IHttpActionResult DeleteKind(int id)
         {
             Kind kind = db.Kinds.Find(id);

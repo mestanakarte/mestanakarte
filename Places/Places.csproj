@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\ApplicationAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GeoTagController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -189,6 +190,10 @@
     <Compile Include="Migrations\201412042002297_Fix_HousingNumber_type.cs" />
     <Compile Include="Migrations\201412042002297_Fix_HousingNumber_type.Designer.cs">
       <DependentUpon>201412042002297_Fix_HousingNumber_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412222155074_Add_AddressLine.cs" />
+    <Compile Include="Migrations\201412222155074_Add_AddressLine.Designer.cs">
+      <DependentUpon>201412222155074_Add_AddressLine.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -275,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412042002297_Fix_HousingNumber_type.resx">
       <DependentUpon>201412042002297_Fix_HousingNumber_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412222155074_Add_AddressLine.resx">
+      <DependentUpon>201412222155074_Add_AddressLine.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
